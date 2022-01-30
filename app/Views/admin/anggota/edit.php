@@ -3,67 +3,159 @@
 <?= $this->section('main'); ?>
 <section class="section">
   <div class="section-header">
-    <h1>Edit User</h1>
+    <h1>Edit Anggota</h1>
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item active"><a href="<?= base_url(); ?>">Dashboard</a></div>
-      <div class="breadcrumb-item active"><a href="<?= base_url('admin/user'); ?>">User</a></div>
+      <div class="breadcrumb-item active"><a href="<?= base_url('admin/anggota'); ?>">Anggota</a></div>
       <div class="breadcrumb-item">Edit</div>
     </div>
   </div>
 
   <div class="section-body">
-    <h2 class="section-title">Edit User</h2>
+    <h2 class="section-title">Edit Anggota</h2>
     <p class="section-lead">
-      Halaman edit data user.
+      Halaman edit data anggota koperasi.
     </p>
     <div class="row">
       <div class="col-12">
-        <?= form_open('admin/user/edit/' . $user->userid); ?>
+        <?= form_open_multipart('admin/anggota/edit/' . $anggota->id); ?>
         <?= form_hidden('_method', 'PUT'); ?>
+        <?= form_hidden('old_ktp', $anggota->foto_ktp); ?>
         <div class="card">
           <div class="card-body">
             <div class="form-group row">
-              <label for="fullname" class="col-sm-2 col-form-label">Fullname</label>
+              <label for="no_anggota" class="col-sm-2 col-form-label">No. Anggota</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control <?= session('errors.fullname') ? 'is-invalid' : ''; ?>" id="fullname" name="fullname" placeholder="<?= 'Fullname' ?>" value="<?= old('fullname') ? old('fullname') : $user->fullname; ?>">
+                <input type="text" class="form-control <?= session('errors.no_anggota') ? 'is-invalid' : ''; ?>" id="no_anggota" name="no_anggota" placeholder="NIK" value="<?= old('no_anggota') ? old('no_anggota') : $anggota->no_anggota; ?>" readonly>
                 <div class="invalid-feedback">
-                  <?= session('errors.fullname'); ?>
+                  <?= session('errors.no_anggota'); ?>
                 </div>
               </div>
             </div>
             <div class="form-group row">
-              <label for="email" class="col-sm-2 col-form-label">Email</label>
+              <label for="nik" class="col-sm-2 col-form-label">NIK</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control <?= session('errors.email') ? 'is-invalid' : ''; ?>" id="email" name="email" placeholder="<?= lang('Auth.email') ?>" value="<?= old('email') ? old('email') : $user->email; ?>">
-                <small id="emailHelp" class="form-text text-muted"><?= lang('Auth.weNeverShare') ?></small>
+                <input type="text" class="form-control <?= session('errors.nik') ? 'is-invalid' : ''; ?>" id="nik" name="nik" placeholder="NIK" value="<?= old('nik') ? old('nik') : $anggota->nik; ?>">
                 <div class="invalid-feedback">
-                  <?= session('errors.email'); ?>
+                  <?= session('errors.nik'); ?>
                 </div>
               </div>
             </div>
             <div class="form-group row">
-              <label for="username" class="col-sm-2 col-form-label">Username</label>
+              <label for="nama" class="col-sm-2 col-form-label">Nama</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control <?= session('errors.username') ? 'is-invalid' : ''; ?>" id="username" name="username" placeholder="<?= lang('Auth.username') ?>" value="<?= old('username') ? old('username') : $user->username; ?>">
+                <input type="text" class="form-control <?= session('errors.nama') ? 'is-invalid' : ''; ?>" id="nama" name="nama" placeholder="Nama" value="<?= old('nama') ? old('nama') : $anggota->nama; ?>">
                 <div class="invalid-feedback">
-                  <?= session('errors.username'); ?>
+                  <?= session('errors.nama'); ?>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="tempat_lahir" class="col-sm-2 col-form-label">Tempat, Tanggal Lahir</label>
+              <div class="col-sm-10">
+                <div class="form-group row mb-0">
+                  <div class="col-sm-6 mb-2">
+                    <input type="text" class="form-control <?= session('errors.tempat_lahir') ? 'is-invalid' : '' ?>" name="tempat_lahir" id="tempat_lahir" placeholder="Tempat" value="<?= old('tempat_lahir') ? old('tempat_lahir') : $anggota->tempat_lahir; ?>">
+                    <div class="invalid-feedback">
+                      <?= session('errors.tempat_lahir'); ?>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 mb-2">
+                    <input type="date" class="form-control <?= session('errors.tgl_lahir') ? 'is-invalid' : ''; ?>" id="tgl_lahir" name="tgl_lahir">
+                    <div class="invalid-feedback">
+                      <?= session('errors.tgl_lahir'); ?>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <fieldset class="form-group row">
-              <label class="col-form-label col-sm-2 float-sm-left pt-0">Role</label>
+              <label class="col-form-label col-sm-2 float-sm-left pt-0">Jenis Kelamin</label>
               <div class="col-sm-10">
                 <?php $i = 0; ?>
-                <?php foreach ($roles as $role) : ?>
-                  <div class="form-check d-inline mr-2">
-                    <input class="form-check-input" type="radio" name="role" id="role<?= $i++; ?>" value="<?= $role->name; ?>" <?= old('role') == $role->name || $i == 1 ? 'checked' : ''; ?>>
-                    <label class="form-check-label" for="role<?= $i++; ?>">
-                      <?= ucwords($role->name); ?>
+                <?php foreach ($genders as $gender) : ?>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input <?= session('errors.jenis_kelamin') ? 'is-invalid' : ''; ?>" type="radio" name="jenis_kelamin" id="jenis_kelamin<?= $i++; ?>" value="<?= $gender; ?>" <?= (old('jenis_kelamin')  ? old('jenis_kelamin') : $anggota->jenis_kelamin) == $gender || $i == 1 ? 'checked' : ''; ?>>
+                    <label class="form-check-label" for="jenis_kelamin<?= $i++; ?>">
+                      <?= ucwords($gender); ?>
                     </label>
+                    <div class="invalid-feedback">
+                      <?= session('errors.jenis_kelamin'); ?>
+                    </div>
                   </div>
                 <?php endforeach; ?>
               </div>
             </fieldset>
+            <div class="form-group row">
+              <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control <?= session('errors.alamat') ? 'is-invalid' : ''; ?>" id="alamat" name="alamat" placeholder="Alamat" value="<?= old('alamat') ? old('alamat') : $anggota->alamat; ?>">
+                <div class="invalid-feedback">
+                  <?= session('errors.alamat'); ?>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="agama" class="col-sm-2 col-form-label">Agama</label>
+              <div class="col-sm-10">
+                <select class="form-control <?= session('errors.agama') ? 'is-invalid' : ''; ?>" name="agama" id="agama">
+                  <option value="">Agama</option>
+                  <?php foreach ($religions as $religion) : ?>
+                    <option value="<?= $religion; ?>" <?= (old('agama') ? old('agama') : $anggota->agama == $religion) ? 'selected' : ''; ?>><?= $religion; ?></option>
+                  <?php endforeach; ?>
+                </select>
+                <div class="invalid-feedback">
+                  <?= session('errors.agama'); ?>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="status_perkawinan" class="col-sm-2 col-form-label">Status Perkawinan</label>
+              <div class="col-sm-10">
+                <select class="form-control <?= session('errors.status_perkawinan') ? 'is-invalid' : ''; ?>" name="status_perkawinan" id="status_perkawinan">
+                  <option value="">Status Perkawinan</option>
+                  <?php
+                  $status_perkawinan = old('status_perkawinan') ? old('status_perkawinan') : $anggota->status_perkawinan;
+                  ?>
+                  <option value="Kawin" <?= $status_perkawinan == 'Kawin' ? 'selected' : ''; ?>>Kawin</option>
+                  <option value="Belum Kawin" <?= $status_perkawinan == 'Belum Kawin' ? 'selected' : ''; ?>>Belum Kawin</option>
+                </select>
+                <div class="invalid-feedback">
+                  <?= session('errors.status_perkawinan'); ?>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="pekerjaan" class="col-sm-2 col-form-label">Pekerjaan</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control <?= session('errors.pekerjaan') ? 'is-invalid' : ''; ?>" id="pekerjaan" name="pekerjaan" placeholder="Pekerjaan" value="<?= old('pekerjaan') ? old('pekerjaan') : $anggota->pekerjaan; ?>">
+                <div class="invalid-feedback">
+                  <?= session('errors.pekerjaan'); ?>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="foto_ktp" class="col-sm-2 col-form-label">Foto KTP</label>
+              <div class="col-sm-10">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input <?= session('errors.foto_ktp') ? 'is-invalid' : ''; ?>" id="foto_ktp" name="foto_ktp" accept="image/*">
+                  <label class="custom-file-label" for="customFile"><?= $anggota->foto_ktp ? $anggota->foto_ktp : "Choose file"; ?></label>
+                  <small id="emailHelp" class="form-text text-muted mt-2">Abaikan jika tidak ingin mengubah file.</small>
+                  <div class="invalid-feedback">
+                    <?= session('errors.foto_ktp'); ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="tgl_daftar" class="col-sm-2 col-form-label">Tanggal Daftar</label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control <?= session('errors.tgl_daftar') ? 'is-invalid' : ''; ?>" id="tgl_daftar" name="tgl_daftar">
+                <div class="invalid-feedback">
+                  <?= session('errors.tgl_daftar'); ?>
+                </div>
+              </div>
+            </div>
             <div class="row">
               <div class="col-sm-10 offset-2">
                 <button type="submit" class="btn btn-primary">Save</button>
@@ -77,4 +169,26 @@
     </div>
   </div>
 </section>
+<?= $this->endSection(); ?>
+
+<?= $this->section('_script'); ?>
+<script>
+  $(document).ready(() => {
+    <?php
+    if (old('tgl_daftar') || $anggota->tgl_daftar) :
+      $date = date_default_format(old('tgl_daftar') ? old('tgl_daftar') : $anggota->tgl_daftar);
+    ?>
+      $('#tgl_daftar').val(new Date('<?= $date; ?>').toDateInputValue());
+    <?php else : ?>
+      $('#tgl_daftar').val(new Date().toDateInputValue());
+    <?php endif; ?>
+
+    <?php
+    if (old('tgl_lahir') || $anggota->tgl_lahir) :
+      $date = date_default_format(old('tgl_lahir') ? old('tgl_lahir') : $anggota->tgl_lahir);
+    ?>
+      $('#tgl_lahir').val(new Date('<?= $date; ?>').toDateInputValue());
+    <?php endif; ?>
+  })
+</script>
 <?= $this->endSection(); ?>

@@ -39,6 +39,7 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->delete('user/(:num)', 'Admin\User::delete/$1');
     $routes->get('user/(:num)', 'Admin\User::detail/$1');
 
+    $routes->put('anggota/edit/(:num)', 'Admin\Anggota::update/$1');
     $routes->post('anggota/create', 'Admin\Anggota::save');
 
     $routes->put('jenissimpanan/edit/(:num)', 'Admin\JenisSimpanan::update/$1');
