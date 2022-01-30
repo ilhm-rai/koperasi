@@ -116,4 +116,12 @@ class Anggota extends BaseController
 
     return redirect()->to('admin/anggota')->with('message', 'Anggota baru berhasil diubah.');
   }
+
+  public function delete($id)
+  {
+    $anggota = $this->anggotaModel->getWhere(['id' => $id])->getRow();
+    $this->anggotaModel->delete($id);
+    unlink(WRITEPATH . 'uploads/ktp/' . $anggota->foto_ktp);
+    return redirect()->to('admin/anggota')->with('message', 'Anggota berhasil dihapus.');
+  }
 }
