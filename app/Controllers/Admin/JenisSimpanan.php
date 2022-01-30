@@ -46,4 +46,33 @@ class JenisSimpanan extends BaseController
 
     return redirect()->to('admin/jenissimpanan')->with('message', 'Jenis simpanan baru berhasil ditambahkan.');
   }
+
+  public function edit($id = 0)
+  {
+    $data = [
+      'title' => 'Edit Jenis Simpanan',
+      'jenissimpanan' => $this->jenisSimpananModel->getJenisSimpanan($id),
+    ];
+
+    if (empty($data['jenissimpanan'])) {
+      return redirect()->back();
+    }
+
+    return view('admin/jenissimpanan/edit', $data);
+  }
+
+  public function update($id)
+  {
+    if (!$this->validate($this->jenisSimpananModel->getValidationRules())) {
+      return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+    }
+
+    $this->jenisSimpananModel->save([
+      'id' => $id,
+      'nama_simpanan' => $this->request->getPost('nama_simpanan'),
+      'besaran_simpanan' => $this->request->getPost('besaran_simpanan'),
+    ]);
+
+    return redirect()->to('admin/jenissimpanan')->with('message', 'Data jenis simpanan berhasil diperbaharui.');
+  }
 }
