@@ -75,4 +75,10 @@ class JenisSimpanan extends BaseController
 
     return redirect()->to('admin/jenissimpanan')->with('message', 'Data jenis simpanan berhasil diperbaharui.');
   }
+
+  public function delete($id)
+  {
+    $this->jenisSimpananModel->delete($id);
+    return redirect()->back()->with('message', 'Jenis simpanan berhasil dihapus.');
+  }
 }
