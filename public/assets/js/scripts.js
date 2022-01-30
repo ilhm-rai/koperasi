@@ -636,4 +636,8 @@ $(function () {
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
     return local.toJSON().slice(0, 10);
   });
+
+  $('.custom-file-input').change((el) => {
+    $(`input[type=file][name="${el.target.name}"] + .custom-file-label`).html(el.target.files[0].name);
+  });
 });
