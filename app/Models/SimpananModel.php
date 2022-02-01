@@ -36,4 +36,10 @@ class SimpananModel extends Model
       return $query->getRow();
     }
   }
+
+  public function getSimpananById($simpananid)
+  {
+    $query = $this->getWhere(['id' => $simpananid]);
+    return $query->getRow();
+  }
 }
