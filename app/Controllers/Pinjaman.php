@@ -71,4 +71,10 @@ class Pinjaman extends BaseController
 
     return redirect()->to('pinjaman')->with('message', 'Peminjaman anggota berhasil ditambahkan.');
   }
+
+  public function delete($id)
+  {
+    $this->pinjamanModel->delete($id);
+    return redirect()->to('pinjaman')->with('message', 'Peminjaman anggota berhasil dihapus.');
+  }
 }

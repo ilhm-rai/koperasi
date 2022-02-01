@@ -53,6 +53,8 @@ $routes->post('simpanan/create', 'Simpanan::save');
 $routes->delete('simpanan/(:num)', 'Simpanan::delete/$1');
 
 $routes->post('pinjaman/create', 'Pinjaman::save');
+$routes->delete('pinjaman/(:num)', 'Pinjaman::delete/$1');
+
 $routes->post('angsuran/create', 'Angsuran::save');
 
 $routes->put('profile/(:num)', 'Profile::changeProfile/$1');

@@ -20,7 +20,9 @@ class PinjamanModel extends Model
   public function getPinjaman($anggotaid = null)
   {
     $query = $this->select('pinjaman.id as pinjamanid, no_pinjaman, no_anggota, nama, jml_pinjaman, total_angsuran, lama_angsuran, sisa_angsuran, tgl_pinjaman, status, keterangan')
-      ->join('anggota', 'anggota.id = pinjaman.anggota_id');
+      ->join('anggota', 'anggota.id = pinjaman.anggota_id')
+      ->orderBy('tgl_pinjaman', 'DESC')
+      ->orderBy('status', 0);
 
     if ($anggotaid == null) {
       $query = $this->get();
