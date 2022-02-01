@@ -39,7 +39,10 @@ class SimpananModel extends Model
 
   public function getSimpananById($simpananid)
   {
-    $query = $this->getWhere(['id' => $simpananid]);
+    $query = $this->select('simpanan.id as simpananid, jenis_simpanan_id, anggota_id, no_anggota, nama, tgl_simpanan, nama_simpanan, jml_simpanan')
+      ->join('anggota', 'anggota.id = simpanan.anggota_id')
+      ->join('jenis_simpanan', 'jenis_simpanan.id = simpanan.jenis_simpanan_id');
+    $query = $this->getWhere(['simpanan.id' => $simpananid]);
     return $query->getRow();
   }
 }
