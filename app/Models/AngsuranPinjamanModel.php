@@ -48,4 +48,14 @@ class AngsuranPinjamanModel extends Model
 
     return $new;
   }
+
+  public function getAngsuranById($angsuranid)
+  {
+    $query = $this->select('angsuran.id as angsuranid, pinjaman_id, no_angsuran, no_pinjaman, no_anggota, nama, angsuran_ke, jml_angsuran, tgl_pembayaran')
+      ->join('pinjaman', 'pinjaman.id = angsuran.pinjaman_id')
+      ->join('anggota', 'anggota.id = pinjaman.anggota_id');
+    $query = $this->where('angsuran.id', $angsuranid);
+    $query = $this->get();
+    return $query->getRow();
+  }
 }
