@@ -48,6 +48,7 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->delete('jenissimpanan/(:num)', 'Admin\JenisSimpanan::delete/$1');
 });
 
+$routes->put('simpanan/edit/(:num)', 'Simpanan::update/$1');
 $routes->post('simpanan/create', 'Simpanan::save');
 $routes->delete('simpanan/(:num)', 'Simpanan::delete/$1');
 
