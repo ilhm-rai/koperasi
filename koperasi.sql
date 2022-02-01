@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Des 2021 pada 01.51
+-- Waktu pembuatan: 01 Feb 2022 pada 11.51
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 7.3.26
 
@@ -49,7 +49,7 @@ CREATE TABLE `anggota` (
 --
 
 INSERT INTO `anggota` (`id`, `no_anggota`, `nik`, `nama`, `tempat_lahir`, `tgl_lahir`, `jenis_kelamin`, `alamat`, `agama`, `status_perkawinan`, `pekerjaan`, `saldo`, `foto_ktp`, `tgl_daftar`) VALUES
-(1, 'AGT13122100001', '4320070061802101', 'Rizky Ardi Ilhami', 'Tasikmalaya', '1999-09-06', 'Laki-laki', 'Mangunreja', 'Islam', 'Belum Kawin', 'Mahasiswa', 125000, '1639379520_4b68a4bc4482029d10ef.jpg', '2021-12-13');
+(1, 'AGT13122100001', '4320070061802101', 'Arnella Stella Maris Purba', 'Medan', '1999-09-06', 'Perempuan', 'Medan', 'Kristen', 'Belum Kawin', 'Pelajar', 100000, '1643536928_6bed400ed003b1de76e4.jpg', '2022-01-30');
 
 -- --------------------------------------------------------
 
@@ -65,15 +65,6 @@ CREATE TABLE `angsuran` (
   `jml_angsuran` int(11) NOT NULL,
   `tgl_pembayaran` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `angsuran`
---
-
-INSERT INTO `angsuran` (`id`, `no_angsuran`, `pinjaman_id`, `angsuran_ke`, `jml_angsuran`, `tgl_pembayaran`) VALUES
-(1, 'AP14122100001', 1, 1, 71666, '2021-12-14'),
-(2, 'AP14122100002', 1, 2, 71666, '2021-12-14'),
-(3, 'AP14122100003', 1, 3, 71666, '2021-12-14');
 
 -- --------------------------------------------------------
 
@@ -177,7 +168,22 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (16, '::1', 'arsaludin', NULL, '2021-12-14 11:09:35', 0),
 (17, '::1', 'admin@gmail.com', 1, '2021-12-14 11:14:31', 1),
 (18, '::1', 'muhamadarsaludin71@gmail.com', 5, '2021-12-14 11:15:17', 1),
-(19, '::1', 'admin@gmail.com', 1, '2021-12-14 11:23:45', 1);
+(19, '::1', 'admin@gmail.com', 1, '2021-12-14 11:23:45', 1),
+(20, '::1', 'admin', NULL, '2022-01-28 21:20:24', 0),
+(21, '::1', 'admin', NULL, '2022-01-28 21:20:29', 0),
+(22, '::1', 'admin@gmail.com', 1, '2022-01-28 21:20:38', 1),
+(23, '::1', 'admin@gmail.com', 1, '2022-01-29 19:51:01', 1),
+(24, '::1', 'admin@gmail.com', 1, '2022-01-30 03:05:18', 1),
+(25, '::1', 'admin@gmail.com', 1, '2022-01-30 07:16:34', 1),
+(26, '::1', 'admin@gmail.com', 1, '2022-01-30 18:52:49', 1),
+(27, '::1', 'admin@gmail.com', 1, '2022-01-31 08:21:53', 1),
+(28, '::1', 'admin@gmail.com', 1, '2022-01-31 21:13:23', 1),
+(29, '::1', 'admin@gmail.com', 1, '2022-01-31 21:24:54', 1),
+(30, '::1', 'admin', NULL, '2022-01-31 21:26:09', 0),
+(31, '::1', 'admin@gmail.com', 1, '2022-01-31 21:26:16', 1),
+(32, '::1', 'admin@gmail.com', 1, '2022-01-31 21:26:55', 1),
+(33, '::1', 'admin@gmail.com', 1, '2022-01-31 21:33:21', 1),
+(34, '::1', 'admin@gmail.com', 1, '2022-02-01 01:41:29', 1);
 
 -- --------------------------------------------------------
 
@@ -299,7 +305,7 @@ CREATE TABLE `pinjaman` (
 --
 
 INSERT INTO `pinjaman` (`id`, `no_pinjaman`, `anggota_id`, `bunga`, `lama_angsuran`, `jml_pinjaman`, `total_angsuran`, `sisa_angsuran`, `tgl_pinjaman`, `status`, `keterangan`) VALUES
-(1, 'PNJ13122100001', 1, 0.025, 3, 200000, 215000, 0, '2021-12-14', '1', '-');
+(4, 'PNJ01022200001', 1, 0.025, 3, 300000, 322500, 322500, '2022-02-01', '1', 'Lengkap');
 
 -- --------------------------------------------------------
 
@@ -321,7 +327,6 @@ CREATE TABLE `simpanan` (
 
 INSERT INTO `simpanan` (`id`, `anggota_id`, `jenis_simpanan_id`, `jml_simpanan`, `tgl_simpanan`) VALUES
 (1, 1, 1, 50000, '2021-12-13'),
-(2, 1, 2, 25000, '2021-12-13'),
 (3, 1, 2, 50000, '2021-12-14');
 
 -- --------------------------------------------------------
@@ -355,7 +360,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `fullname`, `user_image`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'admin@gmail.com', 'admin', 'Administrator', 'default.png', '$2y$10$a.Ts6iV7SHBFH82HzgIUPuWSXtl7pTuAb/5nRCa7t9rBWQe.RrDAa', NULL, NULL, NULL, 'ebb9301d4f63199b4b2a2b7fbbaaa8c6', NULL, NULL, 1, 0, '2021-12-12 00:12:21', '2021-12-12 01:45:04', NULL),
+(1, 'admin@gmail.com', 'admin', 'Administrator', '1643690316_151b66808b4a1ea4a4f0.png', '$2y$10$DWIxxzHxoaxtXGtmNfyz6uJZ3VfKSjmTpujlV4drciA27D7byblhm', NULL, NULL, NULL, 'ebb9301d4f63199b4b2a2b7fbbaaa8c6', NULL, NULL, 1, 0, '2021-12-12 00:12:21', '2022-01-31 22:38:36', NULL),
 (3, 'rizkyardi.ilhami06@gmail.com', 'rizkyardi', 'Rizky Ardi Ilhami', 'default.png', '$2y$10$a.Ts6iV7SHBFH82HzgIUPuWSXtl7pTuAb/5nRCa7t9rBWQe.RrDAa', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2021-12-14 11:04:40', '2021-12-14 11:04:40', NULL);
 
 --
@@ -479,13 +484,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `anggota`
 --
 ALTER TABLE `anggota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `angsuran`
 --
 ALTER TABLE `angsuran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `auth_activation_attempts`
@@ -503,7 +508,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT untuk tabel `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT untuk tabel `auth_permissions`
@@ -527,7 +532,7 @@ ALTER TABLE `auth_tokens`
 -- AUTO_INCREMENT untuk tabel `jenis_simpanan`
 --
 ALTER TABLE `jenis_simpanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
@@ -539,13 +544,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `pinjaman`
 --
 ALTER TABLE `pinjaman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `simpanan`
 --
 ALTER TABLE `simpanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
@@ -591,12 +596,6 @@ ALTER TABLE `auth_users_permissions`
   ADD CONSTRAINT `auth_users_permissions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `jenis_simpanan`
---
-ALTER TABLE `jenis_simpanan`
-  ADD CONSTRAINT `jenis_simpanan_ibfk_1` FOREIGN KEY (`id`) REFERENCES `simpanan` (`jenis_simpanan_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Ketidakleluasaan untuk tabel `pinjaman`
 --
 ALTER TABLE `pinjaman`
@@ -606,7 +605,8 @@ ALTER TABLE `pinjaman`
 -- Ketidakleluasaan untuk tabel `simpanan`
 --
 ALTER TABLE `simpanan`
-  ADD CONSTRAINT `simpanan_ibfk_1` FOREIGN KEY (`anggota_id`) REFERENCES `anggota` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `simpanan_ibfk_1` FOREIGN KEY (`anggota_id`) REFERENCES `anggota` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `simpanan_ibfk_2` FOREIGN KEY (`jenis_simpanan_id`) REFERENCES `jenis_simpanan` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
