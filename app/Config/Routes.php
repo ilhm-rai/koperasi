@@ -49,6 +49,8 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
 });
 
 $routes->post('simpanan/create', 'Simpanan::save');
+$routes->delete('simpanan/(:num)', 'Simpanan::delete/$1');
+
 $routes->post('pinjaman/create', 'Pinjaman::save');
 $routes->post('angsuran/create', 'Angsuran::save');
 

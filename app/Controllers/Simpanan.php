@@ -60,4 +60,17 @@ class Simpanan extends BaseController
 
     return redirect()->to('simpanan')->with('message', 'Simpanan anggota berhasil ditambahkan.');
   }
+
+  public function delete($simpananid)
+  {
+    $simpanan = $this->simpananModel->getSimpananById($simpananid);
+
+    $this->anggotaModel->set('saldo', 'saldo-' . $simpanan->jml_simpanan, false);
+    $this->anggotaModel->where('id', $simpanan->anggota_id);
+    $this->anggotaModel->update();
+
+    $this->simpananModel->delete($simpananid);
+
+    return redirect()->to('simpanan')->with('message', 'Simpanan anggota berhasil dihapus.');
+  }
 }
