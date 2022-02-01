@@ -61,7 +61,6 @@
                       <td> <?= $data->status == 0 ? '<span class="badge badge-danger">Belum Lunas</span>' : '<span class="badge badge-sm badge-success">Lunas</span>'; ?></td>
                       <td><?= $data->keterangan; ?></td>
                       <td>
-                        <a href="<?= base_url('pinjaman/edit/' . $data->pinjamanid); ?>" class="btn btn-sm btn-primary mb-1">Edit</a>
                         <?= form_open('pinjaman/' . $data->pinjamanid, ['class' => 'd-inline form-delete']) ?>
                         <?= form_hidden('_method', 'DELETE'); ?>
                         <button type="submit" class="btn btn-sm btn-secondary btn-delete mb-1">Delete</button>
