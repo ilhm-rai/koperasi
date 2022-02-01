@@ -76,4 +76,24 @@ class Angsuran extends BaseController
 
     return redirect()->to('angsuran')->with('message', 'Angsuran anggota berhasil dihapus.');
   }
+
+  public function edit($angsuranid)
+  {
+    $data = [
+      'title' => 'Tambah Angsuran Anggota',
+      'angsuran' => $this->angsuranPinjamanModel->getAngsuranById($angsuranid)
+    ];
+
+    return view('angsuran/edit', $data);
+  }
+
+  public function update($angsuranid)
+  {
+    $this->angsuranPinjamanModel->save([
+      'id' => $angsuranid,
+      'tgl_pembayaran' => $this->request->getPost('tgl_pembayaran'),
+    ]);
+
+    return redirect()->to('angsuran')->with('message', 'Angsuran anggota berhasil diubah.');
+  }
 }

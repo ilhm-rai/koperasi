@@ -55,6 +55,7 @@ $routes->delete('simpanan/(:num)', 'Simpanan::delete/$1');
 $routes->post('pinjaman/create', 'Pinjaman::save');
 $routes->delete('pinjaman/(:num)', 'Pinjaman::delete/$1');
 
+$routes->put('angsuran/edit/(:num)', 'Angsuran::update/$1');
 $routes->post('angsuran/create', 'Angsuran::save');
 $routes->delete('angsuran/(:num)', 'Angsuran::delete/$1');
 
