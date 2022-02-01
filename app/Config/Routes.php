@@ -52,6 +52,8 @@ $routes->post('simpanan/create', 'Simpanan::save');
 $routes->post('pinjaman/create', 'Pinjaman::save');
 $routes->post('angsuran/create', 'Angsuran::save');
 
+$routes->put('profile/(:num)', 'Profile::changeProfile/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
