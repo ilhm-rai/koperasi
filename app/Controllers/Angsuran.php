@@ -63,4 +63,17 @@ class Angsuran extends BaseController
 
     return redirect()->to('angsuran')->with('message', 'Angsuran anggota berhasil ditambahkan.');
   }
+
+  public function delete($angsuranid)
+  {
+    $old = $this->angsuranPinjamanModel->getAngsuranById($angsuranid);
+
+    $this->pinjamanModel->set('sisa_angsuran', 'sisa_angsuran+' . $old->jml_angsuran, false);
+    $this->pinjamanModel->where('id', $old->pinjaman_id);
+    $this->pinjamanModel->update();
+
+    $this->angsuranPinjamanModel->delete($angsuranid);
+
+    return redirect()->to('angsuran')->with('message', 'Angsuran anggota berhasil dihapus.');
+  }
 }
